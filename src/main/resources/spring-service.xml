@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/context
+       http://www.springframework.org/schema/context/spring-context.xsd
+       http://www.springframework.org/schema/tx
+       http://www.springframework.org/schema/tx/spring-tx.xsd
+       http://www.springframework.org/schema/aop
+       http://www.springframework.org/schema/aop/spring-aop.xsd">
+
+    <!--**********扫描service下的包-->
+    <context:component-scan base-package="cn.qqa.service"/>
+
+    <!--配置事务管理类-->
+    <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="dataSource"/>
+    </bean>
+    <!--事务-->
+    <tx:advice id="txAdvie" transaction-manager="transactionManager">
+        <tx:attributes>
+            <tx:method name="*" propagation="REQUIRED"/>
+        </tx:attributes>
+    </tx:advice>
+
+    <!--事务织入-->
+    <aop:config>
+        <aop:pointcut id="pointCut" expression="execution(* cn.qqa.mapper.*.*(..))"/>
+        <aop:advisor advice-ref="txAdvie" pointcut-ref="pointCut"/>
+    </aop:config>
+
+    <!--****************将所有的业务类，注入到spring，可以通过配置或者注解实现-->
+    <bean id="bookServie" class="cn.qqa.service.BookServiceImpl">
+    </bean>
+
+</beans>

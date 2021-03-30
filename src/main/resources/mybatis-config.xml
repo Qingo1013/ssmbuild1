@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+
+
+
+    <!--********************************mybatis配置文件，表明使用了mybatis-->
+
+    <!--********************************日志配置-->
+<!--    <settings>
+        <setting name="logImpl" value="log4j"/>
+    </settings>-->
+    <!--配置蛇形命名(hello_world)到驼峰命名(helloWorld)的映射-->
+    <settings>
+        <setting name="mapUnderscoreToCamelCase" value="true"/>
+    </settings>
+
+
+    <!--别名-->
+    <typeAliases>
+        <package name="cn.qqa.pojo"/>
+    </typeAliases>
+
+
+    
+    <!--映射器-->
+    <mappers>
+        <package name="cn.qqa.mapper"/>
+    </mappers>
+
+</configuration>

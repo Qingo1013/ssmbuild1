@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.qqa.mapper.BooksMapper">
+
+    <!--增-->
+    <insert id="addBook" parameterType="Books">
+        insert into books(book_name, book_counts, detail)
+        values(#{bookName},#{bookCounts},#{detail})
+    </insert>
+
+    <!--删-->
+    <delete id="deleteBookById" parameterType="int">
+        delete from books
+        where book_id = #{bookId}
+    </delete>
+
+    <!--改-->
+    <update id="updateBook" parameterType="Books">
+        update books
+        set book_name = #{bookName},book_counts = #{bookCounts},detail = #{detail}
+        where book_id = #{bookId}
+    </update>
+
+    <!--查-->
+    <select id="selectBookById" resultType="Books">
+        select * from books
+        where book_id = #{bookId}
+    </select>
+
+    <!--查全部-->
+    <select id="selectAllBook" resultType="Books">
+        select * from books
+    </select>
+
+
+</mapper>
